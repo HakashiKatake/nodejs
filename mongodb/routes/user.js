@@ -1,5 +1,5 @@
 const express = require("express")
-const {handleGetAllUsers, handleGetUserById, handlePatchUserById, handleDeleteUserById} = require("../controllers/user")
+const {handleGetAllUsers, handleGetUserById, handlePatchUserById, handleDeleteUserById, handleCreateNewUser} = require("../controllers/user")
 const router = express.Router()
 
 router
