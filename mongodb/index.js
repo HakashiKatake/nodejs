@@ -1,19 +1,26 @@
 
 
 
-const users = require("../MOCK_DATA.json")
-
+const userRouter = require("./routes/user")
+const { connectMongoDb } = require("./connection")
+const { logReqRes } = require("./middlewares/index") 
 
 const app = express()
 const PORT = 8000
+
+//connection
+connectMongoDb("mongodb://127.0.0.1:27017/nodejs")
 
 // Middleware to parse JSON bodies
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-mongoose.connect('mongodb://127.0.0.1:27017/nodejs')
-.then(()=> console.log("MongoDb connected")
-).catch((err) => console.log("Mongo error", err))
+//logs
+app.use(logReqRes("log.txt"))
+
+//Routes
+app.use("/user", userRouter)
+
 
 
 
