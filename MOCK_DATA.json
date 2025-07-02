@@ -1,0 +1,142 @@
+[
+  {
+    "firstName": "John",
+    "lastName": "Smith",
+    "email": "john.smith@email.com",
+    "jobTitle": "Software Engineer",
+    "gender": "Male"
+  },
+  {
+    "firstName": "Sarah",
+    "lastName": "Johnson",
+    "email": "sarah.johnson@email.com",
+    "jobTitle": "Product Manager",
+    "gender": "Female"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Brown",
+    "email": "michael.brown@email.com",
+    "jobTitle": "Data Analyst",
+    "gender": "Male"
+  },
+  {
+    "firstName": "Emily",
+    "lastName": "Davis",
+    "email": "emily.davis@email.com",
+    "jobTitle": "UX Designer",
+    "gender": "Female"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Wilson",
+    "email": "david.wilson@email.com",
+    "jobTitle": "DevOps Engineer",
+    "gender": "Male"
+  },
+  {
+    "firstName": "Jessica",
+    "lastName": "Martinez",
+    "email": "jessica.martinez@email.com",
+    "jobTitle": "Marketing Specialist",
+    "gender": "Female"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Anderson",
+    "email": "robert.anderson@email.com",
+    "jobTitle": "Project Manager",
+    "gender": "Male"
+  },
+  {
+    "firstName": "Amanda",
+    "lastName": "Taylor",
+    "email": "amanda.taylor@email.com",
+    "jobTitle": "Business Analyst",
+    "gender": "Female"
+  },
+  {
+    "firstName": "Christopher",
+    "lastName": "Thomas",
+    "email": "christopher.thomas@email.com",
+    "jobTitle": "Full Stack Developer",
+    "gender": "Male"
+  },
+  {
+    "firstName": "Lisa",
+    "lastName": "Garcia",
+    "email": "lisa.garcia@email.com",
+    "jobTitle": "HR Manager",
+    "gender": "Female"
+  },
+  {
+    "firstName": "James",
+    "lastName": "Rodriguez",
+    "email": "james.rodriguez@email.com",
+    "jobTitle": "Sales Representative",
+    "gender": "Male"
+  },
+  {
+    "firstName": "Michelle",
+    "lastName": "Lee",
+    "email": "michelle.lee@email.com",
+    "jobTitle": "Graphic Designer",
+    "gender": "Female"
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "White",
+    "email": "daniel.white@email.com",
+    "jobTitle": "System Administrator",
+    "gender": "Male"
+  },
+  {
+    "firstName": "Ashley",
+    "lastName": "Harris",
+    "email": "ashley.harris@email.com",
+    "jobTitle": "Content Writer",
+    "gender": "Female"
+  },
+  {
+    "firstName": "Matthew",
+    "lastName": "Clark",
+    "email": "matthew.clark@email.com",
+    "jobTitle": "Quality Assurance Engineer",
+    "gender": "Male"
+  },
+  {
+    "firstName": "Jennifer",
+    "lastName": "Lewis",
+    "email": "jennifer.lewis@email.com",
+    "jobTitle": "Financial Analyst",
+    "gender": "Female"
+  },
+  {
+    "firstName": "Ryan",
+    "lastName": "Walker",
+    "email": "ryan.walker@email.com",
+    "jobTitle": "Mobile Developer",
+    "gender": "Male"
+  },
+  {
+    "firstName": "Nicole",
+    "lastName": "Hall",
+    "email": "nicole.hall@email.com",
+    "jobTitle": "Operations Manager",
+    "gender": "Female"
+  },
+  {
+    "firstName": "Kevin",
+    "lastName": "Allen",
+    "email": "kevin.allen@email.com",
+    "jobTitle": "Database Administrator",
+    "gender": "Male"
+  },
+  {
+    "firstName": "Rachel",
+    "lastName": "Young",
+    "email": "rachel.young@email.com",
+    "jobTitle": "Social Media Manager",
+    "gender": "Female"
+  }
+]

@@ -1,0 +1,4 @@
+Schema - define the model
+
+Schema - model 
+using the model we do crud ops
