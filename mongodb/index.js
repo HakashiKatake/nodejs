@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(logReqRes("log.txt"))
 
 //Routes
-app.use("/user", userRouter)
+app.use("/api/user", userRouter)
 
 
 
