@@ -10,10 +10,40 @@
     <% if (locals.id) { %> 
         <p> URL Generate: http://localhost:8001/url/ <%= id %></p>
     <% } %>
-     <form action="/url" method="POST">
+    <div>
+        <form action="/url" method="POST">
         <label for="url">Enter URL:</label>
         <input type="text" name="url" required>
         <button type="submit">Shorten URL</button>
     </form>
+
+
+    </div>
+
+    <div>
+        <% if (locals.urls)  { %> 
+        <table>
+            <thead>
+                <th>S. No</th>
+                <th>Short ID</th>
+                 <th>Redirect</th>
+                <th>Clicks</th>
+            </thead>
+            <tbody>
+                <% urls.forEach((url, index) => { %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= url.shortId %></td>
+                        <td><a href="/url/<%= url.shortId %>">http://localhost:8001/url/<%= url.shortId %></a></td>
+                        <td><%= url.visitHistory.length %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        
+    </div>
+    
+
+
 </body>
 </html>
