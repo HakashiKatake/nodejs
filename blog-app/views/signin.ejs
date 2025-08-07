@@ -2,54 +2,112 @@
 <html lang="en">
   <head>
     <%- include('./partials/head') %>
+    <title>Sign In - BlogSpace</title>
   </head>
   <body>
     <%- include('./partials/nav') %>
-    <div class="container mt-4">
-      <% if (typeof error !== 'undefined') { %>
-        <div class="alert alert-danger" role="alert">
-          <%= error %>
+    
+    <div class="content-wrapper">
+      <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 col-md-7">
+            <div class="card fade-in-up" style="border-radius: 24px; box-shadow: var(--shadow-xl);">
+              <div class="card-body p-5">
+                <div class="text-center mb-4">
+                  <i class="fas fa-sign-in-alt" style="font-size: 3rem; color: var(--primary-color);"></i>
+                  <h2 class="mt-3 mb-2">Welcome Back</h2>
+                  <p class="text-muted">Sign in to your BlogSpace account</p>
+                </div>
+
+                <% if (typeof error !== 'undefined') { %>
+                  <div class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i><%= error %>
+                  </div>
+                <% } %>
+
+                <form action="/user/signin" method="post" class="needs-validation" novalidate>
+                  <div class="mb-4">
+                    <label for="email" class="form-label">
+                      <i class="fas fa-envelope me-2"></i>Email Address
+                    </label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      name="email"
+                      placeholder="Enter your email"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Please provide a valid email address.
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="password" class="form-label">
+                      <i class="fas fa-lock me-2"></i>Password
+                    </label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      name="password"
+                      placeholder="Enter your password"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Please provide your password.
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="remember" />
+                      <label class="form-check-label" for="remember">
+                        Remember me
+                      </label>
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary w-100 mb-3">
+                    <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                  </button>
+                </form>
+
+                <div class="text-center">
+                  <p class="text-muted mb-0">
+                    Don't have an account? 
+                    <a href="/user/signup" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                      Create one here
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      <% } %>
-      <form action="/user/signin" method="post">
-        
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input
-            
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-            name="email"
-          />
-          <small id="emailHelp" class="form-text text-muted"
-            >We'll never share your email with anyone else.</small
-          >
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input
-           
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            placeholder="Password"
-            name="password"
-          />
-        </div>
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-          <label class="form-check-label" for="exampleCheck1"
-            >Check me out</label
-          >
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        
-      </form>
+      </div>
     </div>
 
     <%- include('./partials/scripts') %>
+    
+    <script>
+      // Bootstrap form validation
+      (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+          var forms = document.getElementsByClassName('needs-validation');
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
   </body>
 </html>

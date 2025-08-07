@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title><%= blog.title %> - BlogSpace</title>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="content-wrapper">
+      <!-- Blog Header -->
+      <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <article class="fade-in-up">
+              <!-- Blog Title and Meta -->
+              <div class="text-center mb-5">
+                <h1 class="display-4 fw-bold mb-4" style="color: var(--text-primary); line-height: 1.2;">
+                  <%= blog.title %>
+                </h1>
+                <div class="d-flex align-items-center justify-content-center mb-4">
+                  <img src="<%= blog.createdBy.profileImageURL %>" alt="<%= blog.createdBy.fullName %>" 
+                       class="rounded-circle me-3" style="width: 48px; height: 48px; object-fit: cover;">
+                  <div class="text-start">
+                    <h6 class="mb-0 fw-medium"><%= blog.createdBy.fullName %></h6>
+                    <small class="text-muted">
+                      <i class="fas fa-calendar-alt me-1"></i>
+                      <%= new Date(blog.createdAt).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      }) %>
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cover Image -->
+              <div class="mb-5">
+                <img src="<%= blog.coverImageURL %>" alt="<%= blog.title %>" 
+                     class="img-fluid rounded-4 w-100" 
+                     style="max-height: 500px; object-fit: cover; box-shadow: var(--shadow-lg);">
+              </div>
+
+              <!-- Blog Content -->
+              <div class="blog-content mb-5" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-primary);">
+                <% 
+                  // Split blog content into paragraphs and format
+                  const paragraphs = blog.body.split('\n').filter(p => p.trim() !== '');
+                %>
+                <% paragraphs.forEach(paragraph => { %>
+                  <p class="mb-4"><%= paragraph.trim() %></p>
+                <% }) %>
+              </div>
+
+              <!-- Blog Actions -->
+              <div class="d-flex justify-content-between align-items-center py-4 border-top border-bottom">
+                <div class="d-flex align-items-center">
+                  <button class="btn btn-outline-primary me-3">
+                    <i class="fas fa-heart me-2"></i>Like
+                  </button>
+                  <button class="btn btn-outline-secondary">
+                    <i class="fas fa-share me-2"></i>Share
+                  </button>
+                </div>
+                <a href="/" class="btn btn-outline-primary">
+                  <i class="fas fa-arrow-left me-2"></i>Back to Home
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="container pb-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card" style="border-radius: 20px; box-shadow: var(--shadow-md);">
+              <div class="card-body p-4">
+                <h3 class="mb-4">
+                  <i class="fas fa-comments me-2" style="color: var(--primary-color);"></i>
+                  Comments (<%= comments.length %>)
+                </h3>
+
+                <!-- Add Comment Form -->
+                <% if (locals.user) { %>
+                <div class="mb-4 p-4 rounded-3" style="background: var(--secondary-color);">
+                  <form action="/blog/comment/<%= blog._id %>" method="post" class="needs-validation" novalidate>
+                    <div class="d-flex align-items-start">
+                      <img src="<%= locals.user.profileImageURL %>" alt="Your Profile" 
+                           class="rounded-circle me-3" style="width: 40px; height: 40px; object-fit: cover;">
+                      <div class="flex-grow-1">
+                        <textarea
+                          name="content"
+                          class="form-control mb-3"
+                          placeholder="Share your thoughts about this blog post..."
+                          rows="3"
+                          required
+                          style="resize: vertical;"
+                        ></textarea>
+                        <div class="invalid-feedback">
+                          Please write a comment before submitting.
+                        </div>
+                        <button class="btn btn-primary" type="submit">
+                          <i class="fas fa-paper-plane me-2"></i>Post Comment
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <% } else { %>
+                <div class="text-center p-4 mb-4 rounded-3" style="background: var(--secondary-color);">
+                  <p class="mb-3 text-muted">
+                    <i class="fas fa-sign-in-alt me-2"></i>
+                    Sign in to join the conversation
+                  </p>
+                  <a href="/user/signin" class="btn btn-primary me-2">Sign In</a>
+                  <a href="/user/signup" class="btn btn-outline-primary">Sign Up</a>
+                </div>
+                <% } %>
+
+                <!-- Comments List -->
+                <div class="comments-list">
+                  <% if (comments.length > 0) { %>
+                    <% comments.forEach((comment, index) => { %>
+                    <div class="comment-item p-3 mb-3 rounded-3 fade-in-up" 
+                         style="background: rgba(99, 102, 241, 0.05); animation-delay: <%= index * 0.1 %>s;">
+                      <div class="d-flex align-items-start">
+                        <img src="<%= comment.createdBy.profileImageURL %>" alt="<%= comment.createdBy.fullName %>" 
+                             class="rounded-circle me-3" style="width: 40px; height: 40px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                          <div class="d-flex align-items-center mb-2">
+                            <h6 class="mb-0 fw-medium me-2"><%= comment.createdBy.fullName %></h6>
+                            <small class="text-muted">
+                              <i class="fas fa-clock me-1"></i>
+                              <%= new Date(comment.createdAt).toLocaleDateString() %>
+                            </small>
+                          </div>
+                          <p class="mb-0" style="line-height: 1.6;"><%= comment.content %></p>
+                        </div>
+                      </div>
+                    </div>
+                    <% }) %>
+                  <% } else { %>
+                    <div class="text-center py-5">
+                      <i class="fas fa-comment-slash" style="font-size: 3rem; color: var(--text-secondary); opacity: 0.5;"></i>
+                      <h5 class="mt-3 mb-2">No comments yet</h5>
+                      <p class="text-muted">Be the first to share your thoughts!</p>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('./partials/scripts') %>
+    
+    <script>
+      // Bootstrap form validation
+      (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+          var forms = document.getElementsByClassName('needs-validation');
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
+  </body>
+</html>

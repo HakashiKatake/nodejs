@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Create New Blog - BlogSpace</title>
+</head>
+<body>
+    <%- include('./partials/nav') %>
+    
+    <div class="content-wrapper">
+      <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card fade-in-up" style="border-radius: 24px; box-shadow: var(--shadow-xl);">
+              <div class="card-body p-5">
+                <div class="text-center mb-5">
+                  <i class="fas fa-pen-fancy" style="font-size: 3rem; color: var(--primary-color);"></i>
+                  <h2 class="mt-3 mb-2">Create New Blog Post</h2>
+                  <p class="text-muted">Share your thoughts and stories with the world</p>
+                </div>
+
+                <form action="/blog" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                  <div class="mb-4">
+                    <label for="title" class="form-label">
+                      <i class="fas fa-heading me-2"></i>Blog Title
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="title"
+                      name="title"
+                      placeholder="Enter an engaging title for your blog"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Please provide a title for your blog.
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="coverImage" class="form-label">
+                      <i class="fas fa-image me-2"></i>Cover Image
+                    </label>
+                    <div class="position-relative">
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="coverImage"
+                        name="coverImage"
+                        accept="image/*"
+                        required
+                      />
+                      <div class="invalid-feedback">
+                        Please select a cover image for your blog.
+                      </div>
+                    </div>
+                    <small class="form-text text-muted">
+                      <i class="fas fa-info-circle me-1"></i>Choose an eye-catching image that represents your blog content
+                    </small>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="body" class="form-label">
+                      <i class="fas fa-align-left me-2"></i>Blog Content
+                    </label>
+                    <textarea 
+                      name="body" 
+                      class="form-control" 
+                      id="body" 
+                      rows="12"
+                      placeholder="Write your blog content here... Share your thoughts, experiences, and insights with the community."
+                      required
+                      style="resize: vertical; min-height: 300px;"
+                    ></textarea>
+                    <div class="invalid-feedback">
+                      Please write some content for your blog.
+                    </div>
+                    <small class="form-text text-muted">
+                      <i class="fas fa-lightbulb me-1"></i>Tip: Use clear paragraphs and engaging language to keep your readers interested
+                    </small>
+                  </div>
+
+                  <div class="d-flex gap-3 justify-content-end">
+                    <a href="/" class="btn btn-outline-secondary">
+                      <i class="fas fa-times me-2"></i>Cancel
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                      <i class="fas fa-paper-plane me-2"></i>Publish Blog
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('./partials/scripts') %>
+    
+    <script>
+      // Bootstrap form validation
+      (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+          var forms = document.getElementsByClassName('needs-validation');
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+
+      // Image preview functionality
+      document.getElementById('coverImage').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            // You can add image preview functionality here if needed
+            console.log('Image selected:', file.name);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    </script>
+</body>
+</html>

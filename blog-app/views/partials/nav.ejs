@@ -1,26 +1,59 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark" >
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/" style="color: var(--primary-color); font-family: 'Playfair Display', serif; font-size: 1.8rem;">
+      <i class="fas fa-feather-alt me-2"></i>BlogSpace
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="border: none;">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-       
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            
+          <a class="nav-link fw-medium" href="/" style="color: var(--text-primary);">
+            <i class="fas fa-home me-1"></i>Home
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Logout</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
         </li>
+        <% if (locals.user) { %>
+          <li class="nav-item">
+            <a class="nav-link fw-medium" href="/blog/add-new" style="color: var(--text-primary);">
+              <i class="fas fa-plus-circle me-1"></i>Create Blog
+            </a>
+          </li>
+        <% } %>
+      </ul>
+      
+      <ul class="navbar-nav">
+        <% if (locals.user) { %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center fw-medium" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: var(--text-primary);">
+              <img src="<%= locals.user.profileImageURL %>" alt="Profile" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;">
+              <%= locals.user.fullName %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" style="border: none; box-shadow: var(--shadow-lg); border-radius: 12px;">
+              <li><a class="dropdown-item" href="/user/logout"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+            </ul>
+          </li>
+        <% } else { %>
+          <li class="nav-item me-2">
+            <a class="btn btn-outline-primary" href="/user/signin">
+              <i class="fas fa-sign-in-alt me-1"></i>Sign In
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary" href="/user/signup">
+              <i class="fas fa-user-plus me-1"></i>Sign Up
+            </a>
+          </li>
+        <% } %>
       </ul>
     </div>
   </div>
 </nav>
+
+<% if (locals.error) { %>
+    <div class="container mt-4">
+      <div class="alert alert-danger" role="alert">
+        <%= locals.error %>
+      </div>
+    </div>
+<% } %>
